@@ -176,14 +176,14 @@ ___
 ![Imagen Consola](/imagen1.png)
 
 
-![Imagen Carpetas](../imagen2.png)
+![Imagen Carpetas](/imagen2.png)
 
 
-![Imagen Diagrama JWT](../imagen3.png)
+![Imagen Diagrama JWT](/imagen3.png)
 
-![Imagen Diagrama JWT](../imagen5.png)
+![Imagen Diagrama JWT](/imagen5.png)
 
-![Imagen Diagrama JWT](../imagen4.png)
+![Imagen Diagrama JWT](/imagen4.png)
 ## Desglose del Payload    
 ### sub: "ricardo.iorio"    
 Este es el "subject" (sujeto) del token, que generalmente representa al usuario o entidad a la que se refiere el token. En este caso, indica que el sujeto es "ricardo.iorio".    
