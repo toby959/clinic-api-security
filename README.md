@@ -173,7 +173,7 @@ git push origin feature-nueva
 ___
 # Imagenes:
 
-![Imagen Consola](../imagen1.png)
+![Imagen Consola](/imagen1.png)
 
 
 ![Imagen Carpetas](../imagen2.png)
