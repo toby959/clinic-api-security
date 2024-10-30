@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "bfb8e33e-d521-46df-be11-058d2a7bce30",
+		"name": "Clinic request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32739752"
+	},
+	"item": [
+		{
+			"name": "register doctor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Rafael Santosz\",\r\n    \"email\": \"rafael@gmail.com\",\r\n    \"phone\": \"33456\",\r\n    \"document\": \"663456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n       \"street\": \"Rua das Flores\",\r\n        \"district\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"number\": \"123\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/doctors",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list doctor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Rodrigo Lopez\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"phone\": \"123456\",\r\n    \"document\": \"123456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n        \"street\": \"calle 1\",\r\n        \"district\": \"distrito 1\",\r\n        \"city\": \"Cordoba\",\r\n        \"number\": \"1\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/doctors",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update doctor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Lucas Almeyda\",\r\n    \"document\": \"007748\",\r\n    \"email\": \"lucas@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/doctors/5",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"doctors",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete doctor",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/doctors/11",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"doctors",
+						"11"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{url}}",
+			"value": "localhost:8000",
+			"type": "string"
+		}
+	]
+}
