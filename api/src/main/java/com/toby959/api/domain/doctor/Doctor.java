@@ -7,6 +7,7 @@ import lombok.*;
 @Entity(name = "doctor")
 @Table(name = "doctors")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -29,8 +30,17 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+
     @Embedded
     private Address address;
+
+//    public static enum Role {
+//        ROL_ADMIN,
+//        ROL_USER,
+//        ROL_INVITED
+//    }
 
     public Doctor(MedicalRecordData medicalRecordData) {
         this.name = medicalRecordData.name();

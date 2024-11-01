@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "09487703-0379-4fbb-8e1d-1f4de116c6bc",
+		"name": "clinic-api-security",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32739752"
+	},
+	"item": [
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "register doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Carla Olivieyra\",\r\n    \"email\": \"carla@gmail.com\",\r\n    \"phone\": \"8887\",\r\n    \"document\": \"225557\",\r\n    \"specialty\": \"CARDIOLOGY\",\r\n    \"address\": {\r\n       \"street\": \"Avenida Brasil\",\r\n        \"district\": \"Centro\",\r\n        \"city\": \"Sao Paulo\",\r\n        \"number\": \"2776\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/doctors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list doctor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI4MzYxNTZ9.s8WTYMeEqKc8c1OBymbI0k1m013l63QiBP444vDsZpA\"",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rodrigo Lopez\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"phone\": \"123456\",\r\n    \"document\": \"123456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n        \"street\": \"calle 1\",\r\n        \"district\": \"distrito 1\",\r\n        \"city\": \"Cordoba\",\r\n        \"number\": \"1\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/doctors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data doctor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI4MzY0Mzd9.84WTqpZXUlo2nSAyOFNlBLvkMHIjcuW6daokdX_-VOY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rodrigo Lopez\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"phone\": \"123456\",\r\n    \"document\": \"123456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n        \"street\": \"calle 1\",\r\n        \"district\": \"distrito 1\",\r\n        \"city\": \"Cordoba\",\r\n        \"number\": \"1\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/doctors/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update doctor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Lucas Almeyda\",\r\n    \"document\": \"007748\",\r\n    \"email\": \"lucas@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/doctors/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/doctors/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"doctors",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "register patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI5MTQ0ODl9.WZF4RCE1v92CrTzOoikODTdwVhbiYX8hqj5WE-etgYs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Maria Gonzalez\",\r\n    \"email\": \"mari@gmail.com\",\r\n    \"phone\": \"4514\",\r\n    \"document\": \"33345339\",\r\n    \"address\": {\r\n        \"addition\": \"quebradura expuesta\",\r\n       \"street\": \"Avenida Libertad\",\r\n        \"district\": \"Norte\",\r\n        \"city\": \"Cartago\",\r\n        \"number\": \"5321\"        \r\n    },\r\n    \"active\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list patient",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI4OTEzNDd9.ydAO6PtBGFmLXMXRycR53ZWpTH4rSWn2p3sKEBqTht8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rodrigo Lopez\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"phone\": \"123456\",\r\n    \"document\": \"123456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n        \"street\": \"calle 1\",\r\n        \"district\": \"distrito 1\",\r\n        \"city\": \"Cordoba\",\r\n        \"number\": \"1\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data patient",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI5NzMxNzl9.nGDiMEN7KVJq_P718jXHj-nZZirTIqhxohv6ov15op4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rodrigo Lopez\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"phone\": \"123456\",\r\n    \"document\": \"123456\",\r\n    \"specialty\": \"ORTHOPEDIC\",\r\n    \"address\": {\r\n        \"street\": \"calle 1\",\r\n        \"district\": \"distrito 1\",\r\n        \"city\": \"Cordoba\",\r\n        \"number\": \"1\",\r\n        \"addition\": \"a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/patients/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI5MTcxMjZ9.QYQ_BqDa3ubF6SCloKuHwn1k-qWgbtJ5FA_AhAV9Rds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Carla Peterson\",\r\n    \"phone\": \"332244\",\r\n    \"address\": {\r\n        \"addition\": \"presion alta\",\r\n        \"street\": \"Avenida Colombia\",\r\n        \"district\": \"Sur\",\r\n        \"city\": \"San Fernando de Catamarca\",\r\n        \"number\": \"101\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/patients/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNhcmRvLmlvcmlvIiwiaXNzIjoiY2xpbmljLWFwaS1zZWN1cml0eSIsImlkIjoxLCJleHAiOjE3MzI5MTcxMjZ9.QYQ_BqDa3ubF6SCloKuHwn1k-qWgbtJ5FA_AhAV9Rds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/patients/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "$2a$12$53R/wJet8mKVVUBVRRPeMOITvW9flwjHp7moVlVOMnw.0XhLwgAPO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"ricardo.iorio\",\r\n    \"user_key\": \"123456\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{url}}",
+			"value": "localhost:8000",
+			"type": "string"
+		}
+	]
+}

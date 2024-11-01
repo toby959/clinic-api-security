@@ -22,8 +22,8 @@ public class SecurityFilter extends OncePerRequestFilter {
         this.service = service;
         this.userRepository = userRepository;
     }
-
-    /*    @Override
+/*
+        @Override
         protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
             System.out.println("El filtro esta siendo llamado");
             // token header
@@ -37,10 +37,13 @@ public class SecurityFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         }
-                   SEGUN EJERCICIO ------------           */
+ */
+
+//#######################################--  runn  --##############################
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("El filtro esta siendo llamado");
+
         var authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
             var token = authHeader.replace("Bearer ", "");
@@ -55,4 +58,37 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+//#####################################################################
+/*    @Override   -- prueba --
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        System.out.println("El filtro está siendo llamado");
+
+        var authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            var token = authHeader.replace("Bearer ", "");
+            var subject = service.getSubject(token);
+            System.out.println(token);                        // data token
+            System.out.println(subject);                      // data user
+
+            if (subject != null) {
+                var user = userRepository.findByLogin(subject);
+                if (user != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else {
+                    System.out.println("Usuario no encontrado: " + subject);
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario no encontrado");
+                    return;
+                }
+            } else {
+                System.out.println("Token inválido o expirado");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
+                return;
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
+ */
 }
+

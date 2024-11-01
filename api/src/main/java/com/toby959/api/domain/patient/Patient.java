@@ -33,6 +33,15 @@ public class Patient {
 
     private Boolean active;
 
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+
+//    public static enum Role {
+//        ROL_ADMIN,
+//        ROL_USER,
+//        ROL_INVITED
+//    }
+
     public Patient(PatientRecordData data) {
         this.active = true;
         this.name = data.name();

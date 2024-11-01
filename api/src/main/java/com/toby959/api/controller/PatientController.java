@@ -1,11 +1,13 @@
 package com.toby959.api.controller;
 
+import com.toby959.api.domain.address.DataAddress;
 import com.toby959.api.domain.patient.*;
 
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,4 +45,16 @@ public class PatientController {
         var patient = repository.getReferenceById(id);
         patient.deactivate();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PatientResponseData> returnPatientData(@PathVariable Long id) {
+        Patient patient = repository.getReferenceById(id);
+        var dataPatient = new PatientResponseData(patient.getId(), patient.getName()
+                , patient.getEmail(), patient.getPhone(), patient.getDocument(),
+                new DataAddress(patient.getAddress().getStreet(), patient.getAddress().getDistrict(),
+                        patient.getAddress().getCity(), patient.getAddress().getNumber(),
+                        patient.getAddress().getAddition()));
+        return ResponseEntity.ok(dataPatient);
+    }
+
 }

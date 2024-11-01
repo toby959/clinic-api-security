@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,23 +21,48 @@ public class DoctorController {
 
     private final IDoctorRepository repository;
 
+
     public DoctorController(IDoctorRepository repository) {
         this.repository = repository;
     }
 
-    @PostMapping()
-    @Secured("ROLE_ADMIN")
+    @PostMapping()               // origin
+    //@Secured("ROLE_ADMIN")     -- ejercicio video --
+    //@PostMapping("/register")               // -- chat --
+    //@PreAuthorize("hasRole('ROL_ADMIN')")   // -- chat --
     public ResponseEntity<DoctorResponseData> registerDoctor(@RequestBody @Valid MedicalRecordData medicalRecordData,
                                                              UriComponentsBuilder uriComponentsBuilder) {
-        Doctor doctor = repository.save(new Doctor(medicalRecordData));
-        DoctorResponseData doctorResponseData = new DoctorResponseData(doctor.getId(), doctor.getName()
-                , doctor.getEmail(), doctor.getPhone(), doctor.getSpecialty().toString(),
+       Doctor doctor = new Doctor(medicalRecordData);
+       doctor = repository.save(doctor);
+
+        DoctorResponseData doctorResponseData = new DoctorResponseData(
+                doctor.getId(),
+                doctor.getName(),
+                doctor.getEmail(),
+                doctor.getPhone(),
+                doctor.getDocument(),
                 new DataAddress(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
                         doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
                         doctor.getAddress().getAddition()));
+        final Boolean active = doctor.getActive();
+
         URI url = uriComponentsBuilder.path("/api/v1/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
         return ResponseEntity.created(url).body(doctorResponseData);
     }
+
+//    @PostMapping()
+//    @Secured("ROLE_ADMIN")
+//    public ResponseEntity<DoctorResponseData> registerDoctor(@RequestBody @Valid MedicalRecordData medicalRecordData,
+//                                                             UriComponentsBuilder uriComponentsBuilder) {
+//        Doctor doctor = repository.save(new Doctor(medicalRecordData));
+//        DoctorResponseData doctorResponseData = new DoctorResponseData(doctor.getId(), doctor.getName()
+//                , doctor.getEmail(), doctor.getPhone(), doctor.getSpecialty().toString(),
+//                new DataAddress(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
+//                        doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
+//                        doctor.getAddress().getAddition()));
+//        URI url = uriComponentsBuilder.path("/api/v1/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
+//        return ResponseEntity.created(url).body(doctorResponseData);
+//    }
 
     @GetMapping
     public ResponseEntity<Page<DataListDoctors>> listDoctors(@PageableDefault(size = 4) Pageable pageable) {
