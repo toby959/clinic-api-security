@@ -37,7 +37,7 @@ public class SecurityConfiguration {
 //    }
 
 //#############################################################################################
-
+/*
     @Bean   // --  Authorization version for all  --
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(c -> c.disable())
@@ -48,6 +48,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 }
+ */
 
 
 //#############################################
@@ -84,16 +85,19 @@ public class SecurityConfiguration {
  */
 //#####################################################  Two #############################
 //---------------------------------------  chat   -------------------------------------------------
-/* @Bean
+@Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para APIs stateless
             .sessionManagement(session -> session
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Deshabilitar sesiones
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers(HttpMethod.POST, "/login").permitAll() // Permitir acceso al login
-                    .requestMatchers("/css/", "/js/", "/img/", "/").permitAll() // Permitir acceso a recursos estáticos y al frontend
+                    .requestMatchers("/css/**", "/js/**", "/img/**", "/").permitAll() // Permitir acceso a recursos estáticos y al frontend
                     .requestMatchers(HttpMethod.POST, "/user/register").permitAll() // Permitir registro de usuarios
-                    .requestMatchers("/swagger-ui.html", "/v3/api-docs/", "/swagger-ui/").permitAll() // Permitir acceso a Swagger
+                    .requestMatchers("/swagger-ui/**").permitAll() // Permitir acceso a Swagger
+                    .requestMatchers("/v3/api-docs/**").permitAll()
+                    .requestMatchers("/swagger-ui.html").permitAll()
+                    .requestMatchers("/swagger-resources/**", "/webjars/**").permitAll()
                     .anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Añadir filtro de seguridad personalizado
@@ -101,7 +105,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
     return http.build();
 }
- */
+
 
 //----------------------------------------------------------------------------------------
     @Bean
