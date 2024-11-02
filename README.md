@@ -174,17 +174,22 @@ git push origin feature-nueva
 ___
 # Imagenes:
 
-![Imagen Consola](/imagen1.png)
+![Imagen Consola](./imagen1.png)
 
 
-![Imagen Carpetas](/imagen2.png)
+![Imagen Carpetas](./imagen2.png)
 
 
-![Imagen Diagrama JWT](/imagen3.png)
+![Imagen Diagrama JWT](./imagen3.png)
 
-![Imagen Diagrama JWT](/imagen5.png)
+![Imagen Diagrama JWT](./imagen5.png)
 
-![Imagen Diagrama JWT](/imagen4.png)
+![Imagen Diagrama JWT](./imagen4.png)
+
+![Imagen Swagger](./imagen8.png)
+
+![Imagen Swagger](./imagen9.png)
+
 ## Desglose del Payload    
 ### sub: "ricardo.iorio"    
 Este es el "subject" (sujeto) del token, que generalmente representa al usuario o entidad a la que se refiere el token. En este caso, indica que el sujeto es "ricardo.iorio".    
@@ -197,6 +202,35 @@ Este es el campo de "expiration" (expiración), que indica cuándo expira el tok
 
 
 ___   
+## Swagger
+
+````
+localhost:8000/swagger-ui.html
+````
+
+### Instrucciones para Autenticación
+
+1. **Genera la Clave**: Utiliza el script proporcionado a continuación para generar la clave.    
+````
+{
+  "login": "ricardo.iorio",
+  "user_key": "123456"
+}
+```` 
+![Imagen Diagrama JWT](./imagen6.png)
+
+![Imagen Diagrama JWT](./imagen7.png)
+2. **Copia el Token**: Una vez que hayas generado la clave, copia el token resultante.
+3. **Autoriza el Acceso**:
+    - Haz clic en el botón **'Authorize'** en la interfaz de Swagger.
+    - Pega el token copiado en el campo correspondiente.
+    - Presiona nuevamente el botón **'Authorize'** para confirmar.
+    - Finalmente, haz clic en el botón **'Close'** para cerrar la ventana de autorización.
+
+Con estos pasos, podrás acceder a todos los endpoints de la API.
+
+
+___
 
 ## Retos 💡
 #### * Postman: exportación de colecciones, puedes exportar tus datos, que incluyen colecciones, entornos y variables globales, en formato JSON. Esto te permite compartir tus configuraciones y pruebas con otros o reutilizarlas en diferentes instancias de Postman.    
@@ -218,6 +252,8 @@ DELETE FROM flyway_schema_history WHERE version = 'la que deseas borrar o la que
 ````bash
 @EnableMethodSecurity(securedEnabled = true)
 ````
+
+#### * Swagger: Leer la documentacion [Visita Swagger](https://springdoc.org/) 
 ___
 
 ## Licencia 📜

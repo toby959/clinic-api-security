@@ -35,7 +35,6 @@ public class DoctorController {
     //@Secured("ROLE_ADMIN")     -- ejercicio video --
     //@PostMapping("/register")               // -- chat --
     //@PreAuthorize("hasRole('ROL_ADMIN')")   // -- chat --
-    //@Tag(name = "")
     @PostMapping()
     @Operation(
             summary = "Register a new Doctor",
