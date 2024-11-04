@@ -1,13 +1,12 @@
 package com.toby959.api.domain.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,9 +27,7 @@ public class User implements UserDetails {
 
     private String user_key;
 
-//     -- chat --
-//    @Enumerated(EnumType.STRING)
-//    private ProfileType rol;
+
 
     @Override      // origin
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,33 +35,6 @@ public class User implements UserDetails {
     }
 
 
-//######################################
-/*
-@Override
-@JsonIgnore
-public Collection<? extends GrantedAuthority> getAuthorities() {
-    List<GrantedAuthority> authorities = new ArrayList<>();
-
-    if (rol != null) {
-        switch (rol) {
-            case ROL_ADMIN:
-                authorities.add(new SimpleGrantedAuthority("ROL_ADMIN"));
-                break;
-            case ROL_USER:
-                authorities.add(new SimpleGrantedAuthority("ROL_USER"));
-                break;
-            case ROL_INVITED:
-                authorities.add(new SimpleGrantedAuthority("ROL_INVITED"));
-                break;
-            default:
-                break;
-        }
-    }
-    return authorities;
-}
- */
-
-//######################################
 
     @Override
     public String getPassword() {

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/patients")
+@SecurityRequirement(name = "bearer-key")
 public class PatientController {
 
     private final IPatientRepository repository;
@@ -36,7 +38,7 @@ public class PatientController {
                     description = "Patient record data to be registered",
                     required = true,
                     content = @Content(
-                            mediaType = "application.json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = PatientRecordData.class)
                     )
             ),
@@ -83,8 +85,7 @@ public class PatientController {
             }
     )
     public ResponseEntity <Page<DataListPatient>> listPatient(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
-        //return repository.findAllByActiveTrue(pageable).map(DataListPatient::new);
-        Page<DataListPatient> patientsPage = repository.findAllByActiveTrue(pageable).map(DataListPatient::new);
+            Page<DataListPatient> patientsPage = repository.findAllByActiveTrue(pageable).map(DataListPatient::new);
 
         if (patientsPage.isEmpty()) {
             return ResponseEntity.notFound().build(); // Retorna 404 si no hay pacientes activos

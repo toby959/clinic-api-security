@@ -10,8 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +44,7 @@ public class AuthenticationController {
                     description = "Authentication request with username and password",
                     required = true,
                     content = @Content(
-                           mediaType = "application/json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = DataAuthenticateUser.class)
                     )
             ),
@@ -54,14 +56,22 @@ public class AuthenticationController {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = DataJWTToken.class)
                             )
-                    )
+                    ),
+                    @ApiResponse(responseCode = "401", description = "Invalid credentials"),
+                    @ApiResponse(responseCode = "400", description = "Bad request")
             }
     )
     public ResponseEntity<DataJWTToken> authenticateUser(@RequestBody @Valid DataAuthenticateUser dataAuthenticateUser) {
-        Authentication authToken = new UsernamePasswordAuthenticationToken(dataAuthenticateUser.login(),
-                dataAuthenticateUser.user_key());
-        var authenticatedUser = authenticationManager.authenticate(authToken);
-        var JWTtoken = service.generateToken((User) authenticatedUser.getPrincipal());
-        return ResponseEntity.ok(new DataJWTToken(JWTtoken));
+        try {
+            Authentication authToken = new UsernamePasswordAuthenticationToken(dataAuthenticateUser.login(),
+                    dataAuthenticateUser.user_key());
+            var authenticatedUser = authenticationManager.authenticate(authToken);
+            var JWTtoken = service.generateToken((User) authenticatedUser.getPrincipal());
+            return ResponseEntity.ok(new DataJWTToken(JWTtoken));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

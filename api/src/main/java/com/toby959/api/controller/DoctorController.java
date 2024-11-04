@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
 
     private final IDoctorRepository repository;
@@ -31,10 +33,6 @@ public class DoctorController {
         this.repository = repository;
     }
 
-                   // origin
-    //@Secured("ROLE_ADMIN")     -- ejercicio video --
-    //@PostMapping("/register")               // -- chat --
-    //@PreAuthorize("hasRole('ROL_ADMIN')")   // -- chat --
     @PostMapping()
     @Operation(
             summary = "Register a new Doctor",
@@ -44,7 +42,7 @@ public class DoctorController {
                     description = "Medical record data for the new doctor",
                     required = true,
                     content = @Content(
-                            mediaType = "application.json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = MedicalRecordData.class)
                     )
             ),
@@ -65,7 +63,9 @@ public class DoctorController {
                     @ApiResponse(
                             responseCode = "409",
                             description = "Doctor already exists",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json"
+                            )
                     )
             }
     )
@@ -89,19 +89,6 @@ public class DoctorController {
         return ResponseEntity.created(url).body(doctorResponseData);
     }
 
-//    @PostMapping()
-//    @Secured("ROLE_ADMIN")
-//    public ResponseEntity<DoctorResponseData> registerDoctor(@RequestBody @Valid MedicalRecordData medicalRecordData,
-//                                                             UriComponentsBuilder uriComponentsBuilder) {
-//        Doctor doctor = repository.save(new Doctor(medicalRecordData));
-//        DoctorResponseData doctorResponseData = new DoctorResponseData(doctor.getId(), doctor.getName()
-//                , doctor.getEmail(), doctor.getPhone(), doctor.getSpecialty().toString(),
-//                new DataAddress(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
-//                        doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
-//                        doctor.getAddress().getAddition()));
-//        URI url = uriComponentsBuilder.path("/api/v1/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
-//        return ResponseEntity.created(url).body(doctorResponseData);
-//    }
 
     @GetMapping
     @Operation(

@@ -239,7 +239,7 @@ ___
 SET SQL_SAFE_UPDATES = 0;
 ````
 ````
-DELETE FROM flyway_schema_history WHERE version = 'la que deseas borrar o la que te da error!!!'
+DELETE FROM flyway_schema_history WHERE version = 'la que deseas borrar o la que te da error!!!';
 ````
 #### * MySQL Workbench: a no usar las palabras reservadas como 'key' debiendo usar en su lugar "user_key".    
 

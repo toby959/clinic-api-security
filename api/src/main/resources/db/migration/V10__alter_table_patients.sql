@@ -1,0 +1,2 @@
+ALTER TABLE patients
+CHANGE COLUMN distrit district VARCHAR(100) NOT NULL;

@@ -13,6 +13,5 @@ public record DataAddress(
                            String number,
                            @NotBlank
                            String addition
-                           //Boolean active   // agregado
      )
 {}

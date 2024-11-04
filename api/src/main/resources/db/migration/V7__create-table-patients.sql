@@ -1,14 +1,2 @@
---CREATE TABLE patients (
---    id BIGINT NOT NULL AUTO_INCREMENT,
---    name VARCHAR(100) NOT NULL,
---    email VARCHAR(100) NOT NULL UNIQUE,
---    phone VARCHAR(100) NOT NULL,
---    document VARCHAR(8) NOT NULL UNIQUE,
---    street VARCHAR(100) NOT NULL,
---    number VARCHAR(20) NOT NULL,
---    addition VARCHAR(100),
---    district VARCHAR(100) NOT NULL,
---    city VARCHAR(100) NOT NULL,
---    active TINYINT NOT NULL DEFAULT 1,
---    PRIMARY KEY (id)
---);
+alter table patients add active tinyint;
+update patients set active = 1;

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
 @OpenAPIDefinition(
@@ -51,4 +52,5 @@ import org.springframework.http.HttpHeaders;
         scheme = "bearer",
         bearerFormat = "JWT"
 )
+@Configuration
 public class SwaggerConfig {}

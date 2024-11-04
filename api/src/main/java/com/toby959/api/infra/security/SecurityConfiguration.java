@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,9 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity(securedEnabled = true)  -- ejercicio video --
-@EnableGlobalMethodSecurity(prePostEnabled = true) // -- chat --
-//Habilita @PreAuthorize y @PostAuthorize          // -- chat --
 public class SecurityConfiguration {
 
     private final SecurityFilter securityFilter;
@@ -36,55 +31,6 @@ public class SecurityConfiguration {
 //                .and().build();
 //    }
 
-//#############################################################################################
-/*
-    @Bean   // --  Authorization version for all  --
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(c -> c.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests((auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .anyRequest().authenticated()))
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-}
- */
-
-
-//#############################################
-//    @Bean               -- video --
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.csrf(AbstractHttpConfigurer::disable)
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-//                        .requestMatchers(HttpMethod.DELETE, "/doctors").hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.DELETE, "/patients").hasRole("ADMIN")
-//                        .anyRequest().authenticated())
-//                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
-//    }
-
-//#####################################################  Two #############################
-/*    @Bean      // mio --
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll() // Permitir acceso a login
-                        .requestMatchers(HttpMethod.POST, "/api/v1/doctors/register").hasRole("ROL_ADMIN") // Crear doctor
-                      //  .requestMatchers(HttpMethod.PUT, "/api/v1/doctors/{id}").hasRole("ADMIN") // Actualizar doctor
-                      //  .requestMatchers(HttpMethod.DELETE, "/api/v1/doctors/{id}").hasRole("ADMIN") // Eliminar doctor
-                     //   .requestMatchers(HttpMethod.GET, "/api/v1/doctors").hasAnyRole("ADMIN", "USER") // Obtener doctores
-                        .anyRequest().authenticated()) // Cualquier otra solicitud requiere autenticación
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
- */
-//#####################################################  Two #############################
-//---------------------------------------  chat   -------------------------------------------------
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para APIs stateless
@@ -107,7 +53,6 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 }
 
 
-//----------------------------------------------------------------------------------------
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
             throws Exception {

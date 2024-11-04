@@ -30,17 +30,10 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
 
     @Embedded
     private Address address;
 
-//    public static enum Role {
-//        ROL_ADMIN,
-//        ROL_USER,
-//        ROL_INVITED
-//    }
 
     public Doctor(MedicalRecordData medicalRecordData) {
         this.name = medicalRecordData.name();
@@ -68,10 +61,7 @@ public class Doctor {
     }
 
     public void deactivate() {
+
         this.active = false;
     }
-
-//    public void activate() {
-//        this.active = true;
-//    }
 }
